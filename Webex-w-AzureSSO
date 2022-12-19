@@ -1,0 +1,38 @@
+For integrate Duo MFA with Webex we’ve way
+
+1.	Configure Duo DAG in Webex SSO configuration – In this configuration we’ve to go through 3 actions (Webex Interface + DAG to login Webex + Push Notification) for login into Webex Admin Portal or Meeting
+2.	Integrate Webex with Azure – No need to do any configuration from Duo side if Azure AD have already configured with Duo MFA and 
+
+I’ve preferred 2nd option and made documents which is here:
+
+<<< On Webex Admin Portal >>>
+
+•	Navigate to Organization Settings > SSO
+•	Turn on SSO Option and You’ll redirect to Activate SSO > Select and export a certificate
+•	Select the appropriate Certificate and Click on Download metadata (Most Secure Preferable)
+
+
+<<< On Azure Admin Portal >>>
+
+•	Navigate to Azure Active Directory > Enterprise applications > New Application > Search Cisco Webex > Create
+
+•	Configuration in Cisco Webex Application in Azure
+  > Go to Properties > Visible to users? > Select No
+  > Go to User and groups > Assign a User
+  >	Go to Single sign-on and Select SAML
+  >	Upload the Downloaded Webex metafile
+  > Go to Single sign-on > Basic SAML Configuration > Click on Edit button
+  >	Copy the Reply URL value and paste it into Sign on URL, and then save your changes.
+  >	Go to Single sign-on > SAML Certificate > Federation Metadata XML > Download
+  >	Don’t click on Test SSO here
+
+<<< On Webex Admin Portal >>>
+
+Got to Webex Amin Portal and If you’re in certificate selection page in your browser, and then click Next Or go to Management > Organization Settings, scroll to Authentication, and then choose Actions > Import Metadata. 
+•	Select More Secure in Certificate signature in metadata (advanced)
+•	Select Test SSO setup, and when a new browser tab opens, authenticate with the IdP by signing in.
+•	Return to the Control Hub browser tab.
+  > If the test was successful, select Successful test. Turn on SSO and click Next.
+  > If the test was unsuccessful, select Unsuccessful test. Turn off SSO and click Next.
+
+Note : The SSO configuration does not take effect in your organization unless you choose first radio button and activate SSO.
